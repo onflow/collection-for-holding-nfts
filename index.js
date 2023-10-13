@@ -12,7 +12,6 @@ const transactionExplanationPath = `${recipe}/explanations/transaction.txt`;
 export const collectionForHoldingNfts = {
   slug: recipe,
   title: "Collection for Holding NFTs",
-  description: "",
   createdAt: Date(2022, 9, 14),
   author: "Flow Blockchain",
   playgroundLink:
