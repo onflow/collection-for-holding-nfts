@@ -7,26 +7,26 @@ import MetadataViews from 0x01
 
 transaction {
 
-    prepare(signer: AuthAccount) {
+    prepare(signer: auth(Storage, Capabilities) &Account) {
         // Return early if the account already has a collection
-        if signer.borrow<&NewExampleNFT.Collection>(from: NewExampleNFT.CollectionStoragePath) != nil {
+        if signer.storage.borrow<&NewExampleNFT.Collection>(from: NewExampleNFT.CollectionStoragePath) != nil {
             return
         }
 
         // Create a new empty collection
         let collection <- NewExampleNFT.createEmptyCollection()
 
-        // save it to the account
-        signer.save(<-collection, to: NewExampleNFT.CollectionStoragePath)
+        // Save it to the account
+        signer.storage.save(<-collection, to: NewExampleNFT.CollectionStoragePath)
 
-        // create a public capability for the collection
-        signer.link<&{NonFungibleToken.CollectionPublic, MetadataViews.ResolverCollection}>(
-            NewExampleNFT.CollectionPublicPath,
-            target: NewExampleNFT.CollectionStoragePath
+        // Create a public capability for the collection
+        let cap = signer.capabilities.storage.issue<&{NonFungibleToken.CollectionPublic, MetadataViews.ResolverCollection}>(
+            from: NewExampleNFT.CollectionStoragePath
         )
+        signer.capabilities.publish(cap, at: NewExampleNFT.CollectionPublicPath)
     }
 
     execute {
-      log("Setup account")
+        log("Setup account")
     }
 }
