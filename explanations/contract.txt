@@ -1,4 +1,3 @@
-This transaction is showing us how we would create a new empty collection and save that resource into a users account.
+The Recipe contract defines a resource called Collection that acts as a container for NFTs (Non-Fungible Tokens). The Collection stores NFTs in a dictionary, where each NFT is identified by a unique ID (a UInt64). 
 
-We then create a public capability to this resource by linking the interface that contains functions the public can use on this resource for this account.
-
+The contract provides functions to manage the NFTs in the collection. The withdraw function allows NFTs to be removed from the collection, and the deposit function allows new NFTs to be added. The idExists function checks if an NFT with a specific ID is present in the collection, while the getIDs function returns a list of all the IDs of NFTs currently in the collection. The contract also includes two additional functions, getSupportedNFTTypes and isSupportedNFTType, to determine the types of NFTs the collection supports. These functions are marked as view, meaning they only read data without making changes. 

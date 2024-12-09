@@ -1,5 +1,3 @@
-This transaction is used to mint an NFT from the account that has the minting resource saved to it. You are able to give other users minting rights, check out the Admin Minting example for that.
+This transaction script sets up an NFT collection for an account if it doesn't already have one. First, it checks whether the account already has a collection stored at a specific path (ExampleNFT.CollectionStoragePath). If a collection exists, the transaction exits early to avoid duplication. If no collection exists, it creates a new empty collection using the ExampleNFT.createEmptyCollection function. The newly created collection is saved into the account's storage at the specified path.
 
-In this case you are defining who is the person that will be receiving the NFT and checking if they actually have the capability to store the NFT in their collection before moving forward. As well as borrowing the Minting resource to mint new NFTS that should be in the account that has the minter saved.
-
-At the end you are executing the transaction and minting the NFT.
+Next, the script issues a capability for the collection, which allows other accounts or contracts to interact with it securely. This capability is published at a public path (ExampleNFT.CollectionPublicPath), making it accessible to external entities. The transaction completes with a log message indicating that the account setup process is finished. 
