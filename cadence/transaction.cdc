@@ -1,1 +1,1 @@
-./cadence/transactions/minting_nft.cdc
+./cadence/transactions/create_nft_collection.cdc
